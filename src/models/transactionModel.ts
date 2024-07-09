@@ -12,9 +12,9 @@ export interface Transaction {
 
 export const createTransaction = async (transaction: {
     amount: number;
-    updated_at: undefined;
+    updated_at: number;
     user_id: number;
-    created_at: undefined;
+    created_at: number;
     target_user_id: number;
     type: string
 }): Promise<Transaction> => {

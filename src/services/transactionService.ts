@@ -9,9 +9,9 @@ export const fundAccount = async (user_id: number, amount: number) => {
     await knex.transaction(async (trx) => {
         await trx('users').where({ id: user_id }).increment('balance', amount);
         await createTransaction({
-            created_at: undefined,
+            created_at: Date.now() ,
             target_user_id: 0,
-            updated_at: undefined,
+            updated_at: Date.now(),
             user_id, type: 'deposit', amount
         });
     });
@@ -27,9 +27,10 @@ export const transferFunds = async (from_user_id: number, to_user_id: number, am
         await trx('users').where({ id: from_user_id }).decrement('balance', amount);
         await trx('users').where({ id: to_user_id }).increment('balance', amount);
         await createTransaction({
-            created_at: undefined,
-            updated_at: undefined,
-            user_id: from_user_id, type: 'transfer', amount, target_user_id: to_user_id});
+            created_at: Date.now(),
+            updated_at: Date.now(),
+            user_id: from_user_id, type: 'transfer', amount, target_user_id: to_user_id
+        });
     });
 };
 
@@ -41,9 +42,10 @@ export const withdrawFunds = async (user_id: number, amount: number) => {
     await knex.transaction(async (trx) => {
         await trx('users').where({ id: user_id }).decrement('balance', amount);
         await createTransaction({
-            created_at: undefined,
+            created_at: Date.now(),
             target_user_id: 0,
-            updated_at: undefined,
-            user_id, type: 'withdrawal', amount});
+            updated_at: Date.now(),
+            user_id, type: 'withdrawal', amount
+        });
     });
 };
