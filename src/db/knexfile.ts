@@ -1,4 +1,4 @@
-import {knex, Knex} from 'knex';
+import knex, { Knex } from 'knex';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -13,12 +13,15 @@ const config: { [key: string]: Knex.Config } = {
             database: process.env.DB_NAME,
         },
         migrations: {
-            directory: './migrations',
+            directory: './src/db/migrations',
         },
         seeds: {
-            directory: './seeds'
-        }
+            directory: './src/db/seeds',
+        },
     },
+    
 };
 
-export default knex(config);
+const knexInstance = knex(config.development);
+
+export default knexInstance;
