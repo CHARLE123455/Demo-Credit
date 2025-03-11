@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import Knex from 'knex';
 import { Model } from 'objection';
-import knexConfig from './db/knexfile';
+import config from './db/knexfile';
 import accountRoutes from './routes/accountRoutes';
 
 
@@ -13,7 +13,7 @@ const environment: string = process.env.NODE_ENV || 'development';
 
 
 // Configure Knex with proper TypeScript types
-const knexConfiguration = knexConfig[environment as keyof typeof knexConfig];
+const knexConfiguration = config[environment as keyof typeof config];
 if(!knexConfiguration) {
     throw new Error(`No configuration found for environment: ${environment}`);
 };

@@ -1,6 +1,6 @@
 import knex from 'knex';
-import knexConfig from '../db/knexfile';
-const db = knex(knexConfig);
+import config from '../db/knexfile';
+const db = knex(config);
 import { Knex } from 'knex';
 import { createTransaction } from '../models/transactionModel';
 import { getUserById } from '../models/userModel';
