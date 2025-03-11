@@ -2,8 +2,11 @@ import knex, { Knex } from 'knex';
 import dotenv from 'dotenv';
 
 dotenv.config();
+interface KnexConfig {
+    [key: string]: Knex.Config;
+}
 
-const config: { [key: string]: Knex.Config } = {
+const config: KnexConfig = {
     development: {
         client: 'pg',
         connection: {
@@ -22,6 +25,4 @@ const config: { [key: string]: Knex.Config } = {
     
 };
 
-const knexInstance = knex(config.development);
-
-export default knexInstance;
+export default config;
